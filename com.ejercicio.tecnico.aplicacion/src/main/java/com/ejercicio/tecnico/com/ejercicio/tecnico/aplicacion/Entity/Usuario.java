@@ -25,9 +25,4 @@ public class Usuario {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Telefono> phones;
 
-    private static final String CORREO_REGEX = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
-
-
-
-
 }

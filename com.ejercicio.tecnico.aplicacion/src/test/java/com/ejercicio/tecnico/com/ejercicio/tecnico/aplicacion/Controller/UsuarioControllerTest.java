@@ -20,51 +20,41 @@ import static org.mockito.ArgumentMatchers.any;
 class UsuarioControllerTest {
 
     UsuarioRepository usuarioRepository = Mockito.mock(UsuarioRepository.class);
-
+    @InjectMocks
+    private com.ejercicio.tecnico.com.ejercicio.tecnico.aplicacion.Controller.UsuarioController usuarioController;
 
     @Mock
     private UsuarioServiceImpl usuarioService;
 
-    @InjectMocks
-    private UsuarioController usuarioController;
 
     @BeforeEach
     void setUp() {
-        Usuario usuario = new Usuario();
-        usuario.setId(1L);
-        usuario.setName("Juan Rodriguez");
-        usuario.setEmail("juas4@rodriguez.com");
-        usuario.setPassword("Eder12345");
-         Mockito.when(usuarioRepository.save(usuario)).thenReturn(usuario);
-
+        Usuario usuario = createTestUsuario();
+        Mockito.when(usuarioRepository.save(usuario)).thenReturn(usuario);
     }
 
     @Test
     public void testRegistrarUsuario() {
-        // Configuración
         MockitoAnnotations.openMocks(this);
 
-        Usuario usuario = new Usuario();
-        usuario.setName("Juan Rodriguez");
-        usuario.setEmail("juas4@rodriguez.com");
-        usuario.setPassword("Eder12345");
+        Usuario usuario = createTestUsuario();
 
-        Usuario usuarioRegistrado = new Usuario();
-        usuarioRegistrado.setId(1L);
-        usuarioRegistrado.setName("Juan Rodriguez");
-        usuarioRegistrado.setEmail("juas4@rodriguez.com");
-        usuarioRegistrado.setPassword("Eder12345");
-        Mockito.when(usuarioService.registrarUsuario(any(Usuario.class))).thenReturn(usuarioRegistrado);
-
-        // Ejecución
+        Mockito.when(usuarioService.registrarUsuario(any(Usuario.class))).thenReturn(usuario);
         ResponseEntity<Usuario> responseEntity = usuarioController.registrarUsuario(usuario);
-
-        // Verificación
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         Usuario usuarioResponse = responseEntity.getBody();
         assertEquals(1L, usuarioResponse.getId());
-        assertEquals("Juan Rodriguez", usuarioResponse.getName());
-        assertEquals("juas4@rodriguez.com", usuarioResponse.getEmail());
-        assertEquals("Eder12345",usuarioResponse.getPassword());
+        assertEquals("Eder Tejada Mellado", usuarioResponse.getName());
+        assertEquals("tejadaeder@gmail.com", usuarioResponse.getEmail());
+        assertEquals("Inicio001.", usuarioResponse.getPassword());
+    }
+
+    private Usuario createTestUsuario() {
+        Usuario usuario = new Usuario();
+        usuario.setId(1L);
+        usuario.setName("Eder Tejada Mellado");
+        usuario.setEmail("tejadaeder@gmail.com");
+        usuario.setPassword("Inicio001.");
+        return usuario;
     }
 }
