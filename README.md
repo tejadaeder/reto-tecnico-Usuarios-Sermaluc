@@ -63,7 +63,7 @@ Con esta dependencia nuestro proyecto contará con unos “endpoints” a travé
 
 8. MANEJO DE MENSAJE DE ERRORES
 
-https://github.com/tejadaeder/reto-tecnico-Usuarios-Sermaluc/blob/main/assets/manejoErores.png
+https://github.com/tejadaeder/reto-tecnico-Usuarios-Sermaluc/blob/main/assets/manejoErrores.png
 
 9. TEST UNITARIOS
 
